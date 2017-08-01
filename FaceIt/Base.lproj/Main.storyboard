@@ -36,7 +36,7 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="eyesOpen" value="NO"/>
                                     <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                        <color key="value" red="0.72524692359999998" green="0.038391640349999999" blue="0.10668318139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="1" green="0.69440395759999995" blue="0.083642732750000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -49,6 +49,9 @@
                             <constraint firstItem="pC7-0W-VYr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vUT-y3-HAH"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="faceView" destination="pC7-0W-VYr" id="QHp-Nw-fd6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

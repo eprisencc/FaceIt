@@ -8,23 +8,64 @@
 
 import UIKit
 
-@IBDesignable // Compiles and runs on storyboard
+//@IBDesignable // Compiles and runs on storyboard
 class FaceView: UIView {
     
+    // Public API
     @IBInspectable  // IBInspectable must be explicitly typed not inferred
-    var scale: CGFloat = 0.9
+    var scale: CGFloat = 0.9 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     @IBInspectable
-    var eyesOpen: Bool = true
+    var eyesOpen: Bool = true {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     @IBInspectable
-    var lineWidth: CGFloat = 5.0
+    var lineWidth: CGFloat = 5.0 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
     @IBInspectable
-    var color: UIColor = UIColor.blue
+    var color: UIColor = UIColor.blue {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     
-    @IBInspectable
-    var mouthCurvature: Double = -0.5 // 1.0 full smile and -1.0 is full frown
+    @IBInspectable // 1.0 full smile and -1.0 is full frown
+    var mouthCurvature: Double = -0.5 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+
+    func changeScale(byReactingTo pinchRecognizer: UIPinchGestureRecognizer) {
+        switch pinchRecognizer.state {
+        case .changed, .ended:
+            scale *= pinchRecognizer.scale
+            pinchRecognizer.scale = 1
+        default:
+            break
+        }
+    }
+    
+    
+    // Private Implementation
+    private struct Ratios {
+        static let skullRadiusToEyeOffset: CGFloat = 3
+        static let skullRadiusToEyeRadius: CGFloat = 10
+        static let skullRadiusToMouthWidth: CGFloat = 1
+        static let skullRadiusToMouthHeight: CGFloat = 3
+        static let skullRadiusToMouthOffset: CGFloat = 3
+    }
     
     private var skullRadius: CGFloat {
       return min(bounds.size.width, bounds.size.height) / 2 * scale
@@ -107,14 +148,6 @@ class FaceView: UIView {
         pathForEye(.left).stroke()
         pathForEye(.right).stroke()
         pathForMouth().stroke()
-    }
-    
-    private struct Ratios {
-        static let skullRadiusToEyeOffset: CGFloat = 3
-        static let skullRadiusToEyeRadius: CGFloat = 10
-        static let skullRadiusToMouthWidth: CGFloat = 1
-        static let skullRadiusToMouthHeight: CGFloat = 3
-        static let skullRadiusToMouthOffset: CGFloat = 3
     }
 
 }
