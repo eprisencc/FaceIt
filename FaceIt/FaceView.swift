@@ -8,7 +8,7 @@
 
 import UIKit
 
-//@IBDesignable // Compiles and runs on storyboard
+@IBDesignable // Compiles and runs on storyboard
 class FaceView: UIView {
     
     // Public API
